@@ -7,7 +7,6 @@ function StatCard({ value, color, name }) {
       style={{
         padding: "15px",
         background: isDarkMode ? "#333" : "#fff",
-
         borderRadius: "10px",
         textAlign: "center",
         borderLeft: `4px solid ${color}`,

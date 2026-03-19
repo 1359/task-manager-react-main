@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import TaskItem from "./TaskItem";
+import TaskFilter from "./TaskFilter";
 import { useTheme } from "../contexts/ThemeContext";
 
 function TaskList({
@@ -55,50 +56,27 @@ function TaskList({
           borderRadius: "8px",
         }}
       >
-        <button
+        <TaskFilter
+          value={stats.total}
+          name={"all"}
+          filter={filter}
           onClick={() => setFilter("all")}
-          style={{
-            padding: "8px 16px",
-            background: filter === "all" ? "#4CAF50" : "#ddd",
-            color: filter === "all" ? "white" : "#000",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontWeight: filter === "all" ? "bold" : "normal",
-          }}
-        >
-          All ({stats.total})
-        </button>
-        <button
+        />
+
+        <TaskFilter
+          value={stats.active}
+          color="#2196f3"
+          name={"active"}
+          filter={filter}
           onClick={() => setFilter("active")}
-          style={{
-            padding: "8px 16px",
-            background: filter === "active" ? "#2196F3" : "#ddd",
-            color: filter === "active" ? "white" : "#000",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontWeight: filter === "active" ? "bold" : "normal",
-          }}
-        >
-          Active ({stats.active})
-        </button>
-        {checkAdmin && (
-          <button
-            onClick={() => setFilter("completed")}
-            style={{
-              padding: "8px 16px",
-              background: filter === "completed" ? "#FF9800" : "#ddd",
-              color: filter === "completed" ? "white" : "#000",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontWeight: filter === "completed" ? "bold" : "normal",
-            }}
-          >
-            Completed ({stats.completed})
-          </button>
-        )}
+        />
+        <TaskFilter
+          value={stats.completed}
+          color="#4caf50"
+          name={"completed"}
+          filter={filter}
+          onClick={() => setFilter("completed")}
+        />
       </div>
 
       {filteredTasks.length === 0 ? (
